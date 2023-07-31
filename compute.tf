@@ -7,12 +7,33 @@ resource "aws_instance" "jenkins-instance" {
   vpc_security_group_ids = [aws_security_group.sg_allow_ssh_jenkins.id]
   subnet_id          = aws_subnet.public-subnet-1.id
   #name            = "${var.name}"
-  user_data = file("install_jenkins.sh")
+  #user_data = file("install_jenkins.sh")
 
   associate_public_ip_address = true
   tags = {
     Name = "Jenkins-Instance"
   }
+
+  provisioner "file" {
+    source      = "install_jenkins.sh"
+    destination = "/tmp/install_jenkins.sh"
+  }
+  # Change permissions on bash script and execute from ubuntu.
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/install_jenkins.sh",
+      "sudo /tmp/install_jenkins.sh",
+    ]
+  }
+  # Login to the ubuntu with the aws key.
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    password    = ""
+    private_key = file(var.keyPath)
+    host        = self.public_ip
+  }
+
 }
 
 resource "aws_security_group" "sg_allow_ssh_jenkins" {

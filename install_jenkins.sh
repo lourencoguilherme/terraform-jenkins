@@ -18,9 +18,8 @@ sudo apt install jenkins -y
 #Step 4: Start Jenkins
 echo "Step 4: Start Jenkins"
 sudo systemctl start jenkins
-sudo systemctl status jenkins
 
 #Step 5: Intall Terraform
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform
+sudo apt update && sudo apt install terraform -y

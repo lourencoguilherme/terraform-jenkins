@@ -35,3 +35,7 @@ variable "instance_ami" {
 variable "keyname" {
   default = "tf-jenkins-aws"
 }
+
+variable "keyPath" {
+   default = "~/.ssh/tf-jenkins-aws.pem"
+}
