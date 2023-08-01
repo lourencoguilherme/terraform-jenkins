@@ -18,9 +18,10 @@ pipeline {
                 DB_HOST = credentials('DB_HOST')
             }
             steps {
-                script {
-                    sh ' cd $WORKDIR/resources
-                    ./flyway-migrate-db.sh "$DB_HOST" "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"'
+                dir('resources') {
+                    script {
+                        sh './flyway-migrate-db.sh "$DB_HOST" "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"'
+                    }
                 }
             }
         }
