@@ -10,6 +10,6 @@ cd "${PWD}"/resources
 ls
 
 docker run --rm \
--v "${PWD}"/db/migration/production/:/flyway/sql \
+-v "./db/migration/production/:/flyway/sql \
 flyway/flyway:9.18.0-alpine -user=${USER} -password=${PASSWORD} -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate \
 -url="jdbc:postgresql://${HOST}/${DATABASE}"
