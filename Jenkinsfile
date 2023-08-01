@@ -18,7 +18,7 @@ pipeline {
                 DB_HOST = credentials('DB_HOST')
             }
             steps {
-                sh 'ls -R $WORKSPACE/resources'
+                sh 'ls -R $WORKSPACE/resources/db/migration/production'
                 script {
                     sh 'docker run --network host --rm \
                         -v $WORKSPACE/resources/db/migration/production:/flyway/sql \
@@ -36,7 +36,6 @@ pipeline {
                 DB_HOST = credentials('DB_HOST')
             }
             steps {
-                sh 'ls -R $WORKSPACE/resources'
                 script {
                     sh 'docker run --network host --rm \
                         -v $WORKSPACE/resources/db/migration/production:/flyway/sql \
