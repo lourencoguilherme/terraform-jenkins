@@ -19,7 +19,8 @@ pipeline {
             }
             steps {
                 script {
-                    sh './flyway-migrate-db.sh "$DB_HOST" "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"'
+                    sh ' cd $WORKDIR/resources
+                    ./flyway-migrate-db.sh "$DB_HOST" "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"'
                 }
             }
         }
