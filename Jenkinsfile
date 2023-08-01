@@ -5,7 +5,7 @@ pipeline {
 
         stage("Checkout source") {
             steps {
-                git url: 'git@github.com:lourencoguilherme/terraform-jenkins.git', branch: 'main'
+                git url: 'https://github.com/lourencoguilherme/terraform-jenkins.git', branch: 'main'
                 sh 'ls'
             }
         }
