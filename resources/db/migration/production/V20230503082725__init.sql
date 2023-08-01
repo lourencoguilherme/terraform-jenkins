@@ -1,17 +1,4 @@
--- DROP ROLE role_test;
-
- DO $$
-BEGIN
-CREATE ROLE role_test WITH
-	NOSUPERUSER
-	NOCREATEDB
-	NOCREATEROLE
-	INHERIT
-	LOGIN
-	NOREPLICATION
-	NOBYPASSRLS
-	CONNECTION LIMIT -1
-	VALID UNTIL 'infinity';
-EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, moving to next statement', SQLERRM USING ERRCODE = SQLSTATE;
-END
-$$;
+create table person(
+	id int not null,
+	name varchar(100) not null
+)

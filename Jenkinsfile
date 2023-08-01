@@ -21,7 +21,7 @@ pipeline {
                 script {
                     dir('resources') {
                         sh 'docker run --network host --rm \
-                            -v "/$(PWD)/db/migration/production/:/flyway/sql" \
+                            -v $WORKSPACE/db/migration/production/:/flyway/sql \
                             flyway/flyway:9.18.0-alpine -user="$DB_USER" -password="$DB_PASSWORD" -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate \
                             -url="jdbc:postgresql://$DB_HOST/$DB_DATABASE"'
                     }
