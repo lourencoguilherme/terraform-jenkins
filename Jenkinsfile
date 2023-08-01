@@ -18,7 +18,7 @@ pipeline {
                 DB_HOST = credentials('DB_HOST')
             }
             steps {
-                sh 'ls -R $WORKDIR/resources'
+                sh 'ls -R $WORKSPACE/resources'
                 script {
                     sh 'docker run --network host --rm \
                         -v /var/jenkins_home/workspace/test-flyway/resources/db/migration/production/:/flyway/sql \
