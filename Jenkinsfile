@@ -10,14 +10,17 @@ pipeline {
             }
         }
 
-        stage('Execução do projeto Terraform') {
+        stage('Execução flyway') {
+            environment {
+                USER = credentials('DB_USER')
+                PASSWORD = credentials('DB_PASSWORD')
+                DATABASE = credentials('DB_DATABASE')
+                HOST = credentials('DB_HOST')
+            }
             steps {
                 script {
                     dir('resources') {
-                        sh 'docker run --rm \
-                            -v "db/migration/production/:/flyway/sql \
-                            flyway/flyway:9.18.0-alpine -user=postgres -password=postgres -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate \
-                            -url="jdbc:postgresql://host.docker.internal:5432/poc"'
+                        sh 'docker run --network host --rm -v "./db/migration/production/:/flyway/sql" flyway/flyway:9.18.0-alpine -user="$USER" -password="$PASSWORD" -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate -url="jdbc:postgresql://$HOST/$DATABASE"' 
                     }
                 }
             }
