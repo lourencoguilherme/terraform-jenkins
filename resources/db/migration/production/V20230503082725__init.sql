@@ -1,4 +1,17 @@
-create table person(
-	id int not null,
-	name varchar(100) not null
-)
+-- DROP ROLE docket_consulta;
+
+ DO $$
+BEGIN
+CREATE ROLE docket_consulta WITH
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	LOGIN
+	NOREPLICATION
+	NOBYPASSRLS
+	CONNECTION LIMIT -1
+	VALID UNTIL 'infinity';
+EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, moving to next statement', SQLERRM USING ERRCODE = SQLSTATE;
+END
+$$;
