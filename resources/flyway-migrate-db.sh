@@ -5,7 +5,7 @@ DATABASE=$2
 USER=$3
 PASSWORD=$4
 
-cd "${PWD}"/resources
+echo "teste teste"
 
 ls
 
