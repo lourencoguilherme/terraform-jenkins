@@ -12,15 +12,18 @@ pipeline {
 
         stage('Execução flyway') {
             environment {
-                USER = credentials('DB_USER')
-                PASSWORD = credentials('DB_PASSWORD')
-                DATABASE = credentials('DB_DATABASE')
-                HOST = credentials('DB_HOST')
+                DB_USER = credentials('DB_USER')
+                DB_PASSWORD = credentials('DB_PASSWORD')
+                DB_DATABASE = credentials('DB_DATABASE')
+                DB_HOST = credentials('DB_HOST')
             }
             steps {
                 script {
                     dir('resources') {
-                        sh 'docker run --network host --rm -v "./db/migration/production/:/flyway/sql" flyway/flyway:9.18.0-alpine -user="$USER" -password="$PASSWORD" -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate -url="jdbc:postgresql://$HOST/$DATABASE"' 
+                        sh 'docker run --network host --rm \
+                            -v "/$(PWD)/db/migration/production/:/flyway/sql" \
+                            flyway/flyway:9.18.0-alpine -user="$DB_USER" -password="$DB_PASSWORD" -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate \
+                            -url="jdbc:postgresql://$DB_HOST/$DB_DATABASE"'
                     }
                 }
             }
