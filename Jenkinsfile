@@ -19,12 +19,10 @@ pipeline {
             }
             steps {
                 script {
-                    dir('resources') {
-                        sh 'docker run --network host --rm \
-                            -v ./db/migration/production/:/flyway/sql \
-                            flyway/flyway:9.18.0-alpine -user="$DB_USER" -password="$DB_PASSWORD" -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate \
-                            -url="jdbc:postgresql://$DB_HOST/$DB_DATABASE"'
-                    }
+                    sh 'docker run --network host --rm \
+                        -v /var/jenkins_home/workspace/test-flyway/resources/db/migration/production/:/flyway/sql \
+                        flyway/flyway:9.18.0-alpine -user="$DB_USER" -password="$DB_PASSWORD" -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V migrate \
+                        -url="jdbc:postgresql://$DB_HOST/$DB_DATABASE"'
                 }
             }
         }
