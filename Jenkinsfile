@@ -18,6 +18,7 @@ pipeline {
             }
             steps {
                 script {
+                    sh 'cd $WORKSPACE'
                     sh './flyway-migrate-db.sh dev "$DB_HOST" "$DB_DATABASE" "$DB_CREDS_USR" "$DB_CREDS_PSW" "$WORKSPACE"'
                 }
             }
