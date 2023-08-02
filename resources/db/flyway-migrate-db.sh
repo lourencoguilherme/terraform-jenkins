@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-HOST=$1
-DATABASE=$2
-USER=$3
-PASSWORD=$4
+ENV=$1
+HOST=$2
+DATABASE=$3
+USER=$4
+PASSWORD=$5
 
 docker-compose run --rm \
 flyway \
+-v "${PWD}/flyway/${ENV}":/flyway/conf \
 -user=${USER} -password=${PASSWORD} \
 -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V \
 -url="jdbc:postgresql://${HOST}/${DATABASE}" \
