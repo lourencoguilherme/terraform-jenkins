@@ -8,7 +8,6 @@ PASSWORD=$5
 
 docker-compose run --rm \
 flyway \
--v "${PWD}/flyway/${ENV}":/flyway/conf \
 -user=${USER} -password=${PASSWORD} \
 -baselineOnMigrate=false -outOfOrder=true -sqlMigrationPrefix=V \
 -url="jdbc:postgresql://${HOST}/${DATABASE}" \
