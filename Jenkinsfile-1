@@ -1,0 +1,29 @@
+pipeline {
+  agent any 
+  environment {
+    DB_CREDS=credentials('DB_CREDS')
+    DB_HOST = credentials('DB_HOST')
+  }
+  stages {
+    stage('Verify version') {
+      steps {
+        sh 'docker run --rm flyway/flyway:8.5.1 version'
+      }
+    }
+    stage('migrate') {
+      steps {
+        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.1 -user=$DB_CREDS_USR -password=$DB_CREDS_PSW -url="jdbc:postgresql://$DB_HOST/saasv2" migrate'
+      }
+    }
+    stage('validate') {
+      steps {
+        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.1 -user=$DB_CREDS_USR -password=$DB_CREDS_PSW -url="jdbc:postgresql://$DB_HOST/saasv2" validate'
+      }
+    }
+    stage('info') {
+      steps {
+        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.1 -user=$DB_CREDS_USR -password=$DB_CREDS_PSW -url="jdbc:postgresql://$DB_HOST/saasv2" info'
+      }
+    }
+  }
+}
