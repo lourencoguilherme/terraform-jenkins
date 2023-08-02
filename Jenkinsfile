@@ -17,7 +17,7 @@ pipeline {
                 DB_DATABASE = credentials('DB_DATABASE')
             }
             steps {
-                sh 'docker run --rm -v $WORKSPACE/resources/db/migration/production:/flyway/sql -v $WORKSPACE/resources/db/flyway/dev:/flyway/conf flyway/flyway:8.5.1 -url="jdbc:postgresql://${HOST}/${DATABASE}" -user=$DB_CREDS_USR -password=$DB_CREDS_PSW migrate'
+                sh 'docker run --rm -v $WORKSPACE/resources/db/migration/production:/flyway/sql -v $WORKSPACE/resources/db/flyway/dev:/flyway/conf flyway/flyway:8.5.1 -url="jdbc:postgresql://${DB_HOST}/${DB_DATABASE}" -user=$DB_CREDS_USR -password=$DB_CREDS_PSW migrate'
             }
         }
     }
