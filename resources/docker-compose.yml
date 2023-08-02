@@ -54,8 +54,8 @@ services:
     image: flyway/flyway:9.18.0-alpine
     command: -configFiles=/flyway/conf/flyway.config -locations=filesystem:/flyway/sql -connectRetries=60 migrate
     volumes:
-      - ${PWD}/db/migration:/flyway/sql
-      - ${PWD}/db/flyway/docker-flyway.config:/flyway/conf/flyway.config
+      - ${PWD}/migration:/flyway/sql
+      - ${PWD}/flyway/docker-flyway.config:/flyway/conf/flyway.config
 
 networks:
   default:
