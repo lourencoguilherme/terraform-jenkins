@@ -16,12 +16,15 @@ pipeline {
                 DB_PASSWORD = credentials('DB_PASSWORD')
                 DB_DATABASE = credentials('DB_DATABASE')
                 DB_HOST = credentials('DB_HOST')
+                DB_KEY = credentials('DB_KEY')
             }
             steps {
-                dir('resources') {
-                    script {
-                        sh './flyway-migrate-db.sh "$DB_HOST" "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"'
-                    }
+               flywayRunner {
+                    name('flyway')
+                    command('migrate')
+                    url('jdbc:postgresql://${HOST}/${DATABASE}')
+                    locations('filesystem:$WORKSPACE/resources/db/migration/production')
+                    credentialsId('$DB_KEY')
                 }
             }
         }
