@@ -3,6 +3,13 @@ pipeline {
 
     stages {
 
+        stage("Checkout source") {
+            steps {
+                git url: 'https://github.com/lourencoguilherme/terraform-jenkins.git', branch: 'main'
+                sh 'ls'
+            }
+        }
+
         stage('Execução flyway') {
             environment {
                 DB_CREDS=credentials('DB_CREDS')
