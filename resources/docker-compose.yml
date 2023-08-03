@@ -24,7 +24,6 @@ services:
     volumes:
       - '/app:/app'
       - '/docker/jenkins/jenkins_home:/var/jenkins_home'
-      - '/var/run/docker.sock:/var/run/docker.sock'
       - '~/.ssh:/var/jenkins_home/.ssh'
       - '~/.m2:/root/.m2'
 
