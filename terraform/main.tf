@@ -31,3 +31,10 @@ module "jenkins" {
   instance_ami = var.instance_ubuntu_ami
   keyname = var.keyname
 }
+
+module "compute" {
+  source = "./compute"
+  vpc_name = "labs-vpc"
+  aws_region = var.region
+  sub_net_availability_zone = "${var.region}a"
+}
