@@ -13,3 +13,5 @@ kubectl apply -f kubernetes/apps/whois.yml
 kubectl apply -f kubernetes/apps/pudim.yml
 
 kubectl apply -f kubernetes/traefik/ingress.yml
+
+kubectl delete deployment --all
