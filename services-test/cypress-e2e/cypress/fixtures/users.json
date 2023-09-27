@@ -1,0 +1,67 @@
+{
+  "valid_user_email": {
+    "email": "guilherme.lourenco1@docket.com.br",
+    "password": "Docket@321"
+  },
+  "valid_user": {
+    "username": "guilherme.lourenco1",
+    "password": "Docket@321"
+  },
+  "invalid_pwd_email": {
+    "email": "guilherme.lourenco1@docket.com.br",
+    "password": "invalid_pwd"
+  },
+  "invalid_pwd": {
+    "username": "guilherme.lourenco1",
+    "password": "invalid_pwd"
+  },
+  "empty_pwd": {
+    "username": "guilherme.lourenço1",
+    "password": ""
+  },
+  "empty_pwd_email": {
+    "email": "guilherme.lourenco1@docket.com.br",
+    "password": ""
+  },
+  "empty_username": {
+    "username": "",
+    "password": "Docket@321"
+  },
+  "empty_user": {
+    "email": "",
+    "password": ""
+  },
+  "invalid_emails":[
+    { "email": "admin&test.com", "password": "123456" },
+    { "email": "www.test.com", "password": "123456" },
+    { "email": "teste@gmail,com", "password": "123456" },
+    { "email": "admin*test.com", "password": "123456" },
+    { "email": "@test.com", "password": "123456" },
+    { "email": "   @test.com", "password": "123456" }
+  ],
+  "invalid_usernames":[
+    { "username": "   ", "password": "123456" },
+    { "username": "&^*&^&*&*^&", "password": "123456" },
+    { "username": "guilherme lourenço", "password": "123456" }
+  ],
+  "username_not_found": {
+    "username": "user.notfound",
+    "password": "Docket@321"
+  },
+  "username_only_numbers": {
+    "username": "1234567890",
+    "password": "Docket@321"
+  },
+  "email_not_found": {
+    "username": "email@docket.com",
+    "password": "Docket@321"
+  },
+  "user_not_found_email": {
+    "email": "email@docket.com",
+    "password": "notfoundpwd"
+  },
+  "user_not_found": {
+    "username": "not.found",
+    "password": "notfoundpwd"
+  }
+}

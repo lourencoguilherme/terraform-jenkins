@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage("Checkout source") {
+            steps {
+                git url: 'https://github.com/lourencoguilherme/terraform-jenkins.git', branch: 'feature/cypress'
+                sh 'ls'
+            }
+        }
+
+        stage('Execução cypress') {
+            steps {
+                dir('services-test') {
+                    script {
+                        sh 'docker run -it -v ./cypress-e2e -w /cypress-e2e cypress/included:12.17.4'
+                    }
+                }
+            }
+        }
+    }
+}

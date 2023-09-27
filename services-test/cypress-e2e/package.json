@@ -1,0 +1,14 @@
+{
+  "name": "automation-docket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "author": "Matheus Mota",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "12.17.4"
+  }
+}
