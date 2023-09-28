@@ -18,9 +18,9 @@ services:
       retries: 3
 
     ports:
-      - '8080:8080'
+      - '9090:8080'
     networks:
-      - default
+      - default-jenkins
     volumes:
       - '/app:/app'
       - '/docker/jenkins/jenkins_home:/var/jenkins_home'
@@ -29,5 +29,5 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
 
 networks:
-  default:
+  default-jenkins:
     driver: bridge

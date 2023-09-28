@@ -7,6 +7,9 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    video: false
+    video: false,
+    env: {
+        ELECTRON_DISABLE_GPU: "1",
+    }
   },
 });
