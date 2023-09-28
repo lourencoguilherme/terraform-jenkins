@@ -10,6 +10,7 @@ module.exports = defineConfig({
     video: false,
     env: {
         ELECTRON_DISABLE_GPU: "1",
+        ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
     }
   },
 });
