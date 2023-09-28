@@ -28,35 +28,6 @@ services:
       - '~/.m2:/root/.m2'
       - "/var/run/docker.sock:/var/run/docker.sock"
 
-  postgres:
-    image: postgres:12.2-alpine
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
-      timeout: 45s
-      interval: 10s
-      retries: 10
-    restart: always
-    ports:
-    - "5432:5432"
-    volumes:
-      - ./db/scripts:/docker-entrypoint-initdb.d/
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=poc
-      - APP_DB_USER=poc
-      - APP_DB_PASS=poc
-      - APP_DB_NAME=poc
-    networks:
-      - default
-
-  flyway:
-    image: flyway/flyway:9.18.0-alpine
-    command: -configFiles=/flyway/conf/flyway.config -locations=filesystem:/flyway/sql -connectRetries=60 migrate
-    volumes:
-      - ${PWD}/migration:/flyway/sql
-      - ${PWD}/flyway/docker-flyway.config:/flyway/conf/flyway.config
-
 networks:
   default:
     driver: bridge
