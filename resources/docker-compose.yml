@@ -26,6 +26,7 @@ services:
       - '/docker/jenkins/jenkins_home:/var/jenkins_home'
       - '~/.ssh:/var/jenkins_home/.ssh'
       - '~/.m2:/root/.m2'
+      - "/var/run/docker.sock:/var/run/docker.sock"
 
   postgres:
     image: postgres:12.2-alpine
